@@ -6,6 +6,8 @@
     <title>Pontos de Coleta - RadarEco</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body>
     <header class="header">
@@ -25,14 +27,9 @@
     </header>
 
     <main class="container">
-        <div class="map-layout">
-            <!-- Área do Mapa -->
-            <div class="map-area card">
-                <!-- Substitua pelo print do mapa do Figma -->
-                <div style="background: #e5e5e5; height: 100%; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #888;">
-                    [Imagem do Mapa Aqui]
-                </div>
-            </div>
+        <div id="mapa-radareco" style="height: 100%; width: 100%; border-radius: 12px; z-index: 1;">
+            
+        </div>
 
             <!-- Barra Lateral -->
             <div class="sidebar">
