@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pontos de Coleta - RadarEco</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="icone-logo.svg" alt="" aria-hidden="true" width="24">
+            RadarEco
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Início</a>
+            <a href="pontos-de-coleta.html" class="active">Pontos de Coleta</a>
+            <a href="sobre.html">Sobre</a>
+        </nav>
+        <button class="btn btn-outline">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h3m10 0h3v3M4 17v3h3m10 0h3v-3"/></svg>
+            Escanear Lixo
+        </button>
+    </header>
+
+    <main class="container">
+        <div class="map-layout">
+            <!-- Área do Mapa -->
+            <div class="map-area card">
+                <!-- Substitua pelo print do mapa do Figma -->
+                <div style="background: #e5e5e5; height: 100%; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #888;">
+                    [Imagem do Mapa Aqui]
+                </div>
+            </div>
+
+            <!-- Barra Lateral -->
+            <div class="sidebar">
+                <p class="subtitle">DO MATERIAL AO DESTINO</p>
+                <h1 class="sidebar-title">Encontre um ponto de coleta.</h1>
+                <p class="description">Busque por região e veja onde entregar cada tipo de resíduo.</p>
+
+                <div class="search-box">
+                    <input type="text" placeholder="Endereço, bairro ou CEP">
+                </div>
+
+                <div class="filters">
+                    <p>Qual material você quer descartar?</p>
+                    <div class="chips">
+                        <span class="chip active">Plástico</span>
+                        <span class="chip">Papel</span>
+                        <span class="chip">Vidro</span>
+                        <span class="chip">Metal</span>
+                    </div>
+                </div>
+
+                <div class="locations-list">
+                    <p class="list-header">3 pontos encontrados <span>Mais próximos primeiro</span></p>
+                    
+                    <div class="location-card">
+                        <div class="loc-info">
+                            <span class="loc-number">1</span>
+                            <div>
+                                <h3>Ecoponto Vila Verde</h3>
+                                <p>Seg-Sáb - 8h às 17h - <strong>Selecionado</strong></p>
+                                <small>Plástico, papel, vidro e metal</small>
+                            </div>
+                        </div>
+                        <span class="distance">800 m</span>
+                    </div>
+
+                    <div class="location-card">
+                        <div class="loc-info">
+                            <span class="loc-number">2</span>
+                            <div>
+                                <h3>Cooperativa Novo Ciclo</h3>
+                                <p>Seg-Sex - 9h às 18h</p>
+                                <small>Plástico, papel e metal</small>
+                            </div>
+                        </div>
+                        <span class="distance">1,4 km</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
