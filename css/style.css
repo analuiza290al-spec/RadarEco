@@ -83,6 +83,8 @@ label{font-size:12px;font-weight:700}
 .steps b{display:block;margin:12px 0 6px}
 .steps p{font-size:13px;color:var(--mute)}
 .n{float:right;font-size:12px;color:var(--mute)}
+.photo-fig img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:var(--r);display:block}
+.photo-fig figcaption{margin-top:6px}
 
 /* Rodapé */
 footer{border-top:1px solid var(--line);font-size:12px;color:var(--mute)}
@@ -103,9 +105,5 @@ footer span a{margin-left:20px}
 .scan[aria-current=page]{background:#ffffff22}
 button.btn{width:100%}
 [hidden]{display:none!important}
-
-
-.photo-fig img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:var(--r);display:block}
-.photo-fig figcaption{margin-top:6px}
  
 }
