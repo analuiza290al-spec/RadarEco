@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RadarEco · Pontos de Coleta</title>
+<meta name="description" content="Encontre pontos de coleta de recicláveis perto de você.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header><div class="bar">
+ <a class="logo" href="index.html">▢ RadarEco</a>
+ <nav aria-label="Principal">
+  <a href="index.html">Início</a>
+  <a href="pontos-de-coleta.html" aria-current="page">Pontos de Coleta</a>
+  <a href="sobre.html">Sobre</a>
+ </nav>
+ <a class="scan" href="index.html">Escanear Lixo</a>
+</div></header>
+
+<main>
+ <p class="eb">DO MATERIAL AO DESTINO</p>
+ <h1>Encontre um ponto de coleta.</h1>
+ <p class="lead">Busque por região e veja onde entregar cada tipo de resíduo. Confirme a aceitação antes de sair.</p>
+
+ <div class="card mapwrap">
+  <div id="map" role="region" aria-label="Mapa de pontos de coleta"></div>
+  <div class="side">
+   <form id="sf">
+    <label for="addr">Endereço, bairro ou CEP</label>
+    <div class="sf">
+     <input id="addr" type="search" placeholder="Ex.: Pinheiros, São Paulo">
+     <button class="btn p" type="submit">Buscar</button>
+     <button class="btn s" type="button" id="loc">Usar minha localização</button>
+    </div>
+    <p class="note" id="st" role="status" style="margin-top:8px"></p>
+   </form>
+   <div>
+    <label id="ml">Qual material você quer descartar?</label>
+    <div class="chips" role="group" aria-labelledby="ml" id="chips">
+     <button aria-pressed="true" data-m="plastico">Plástico</button>
+     <button aria-pressed="false" data-m="papel">Papel</button>
+     <button aria-pressed="false" data-m="vidro">Vidro</button>
+     <button aria-pressed="false" data-m="metal">Metal</button>
+    </div>
+   </div>
+   <div class="row note"><b id="cnt"></b><span>Mais próximos primeiro</span></div>
+   <div id="list"></div>
+  </div>
+ </div>
+ <p class="note" style="margin-top:12px">Pontos do OpenStreetMap, mapa colaborativo: podem estar incompletos ou desatualizados. Confirme horário e materiais aceitos antes de sair.</p>
+</main>
+
+<footer><div>
+ <p>RadarEco · Pequenas escolhas. Um futuro mais limpo.</p>
+ <span><a href="sobre.html">Privacidade</a><a href="sobre.html">Acessibilidade</a><a href="mailto:contato@exemplo.com">Fale com a gente</a></span>
+</div></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+<script src="js/mapa.js"></script>
+</body>
+</html>
