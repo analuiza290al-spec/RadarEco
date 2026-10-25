@@ -87,3 +87,7 @@ label{font-size:12px;font-weight:700}
 .sf{display:flex;gap:8px;margin-top:6px;flex-wrap:wrap}
 .sf input{flex:1 1 160px;font:15px Montserrat;padding:11px 12px;border:2px solid var(--b);border-radius:8px}
 .sf .btn{padding:9px}
+
+/* Botões empilhados e resultado */
+.btn + .btn{margin-top:10px}
+.warn{background:#fff4e5;border-color:var(--or)}
