@@ -17,8 +17,8 @@ header{background:var(--g);color:#fff;position:sticky;top:0;z-index:1000}
 .bar{max-width:1200px;margin:auto;padding:12px 24px;display:flex;align-items:center;gap:28px;flex-wrap:wrap}
 .logo{font-weight:700;font-size:20px;color:#fff;margin-right:auto}
 .logo:hover{text-decoration:none}
-.logo{display:flex;align-items:center;gap:12px}
-.logo img{height:44px;width:auto;display:block;background:#fff;border-radius:10px;padding:4px;object-fit:contain}
+.logo{display:flex;align-items:center}
+.logo img{height:52px;width:auto;display:block;background:#fff;border-radius:12px;padding:4px 14px;object-fit:contain}
 nav{display:flex;gap:22px;margin:0 auto}
 nav a{color:#fff;padding:6px 0;border-bottom:3px solid transparent}
 nav a:hover{text-decoration:none}
@@ -153,6 +153,7 @@ footer span a{margin-left:20px}
  main{padding:24px 16px}
  #map{min-height:320px}
  .ph{flex:none;aspect-ratio:4/3}
+ .logo img{height:42px}
 }
 
 /* ---------- Menos movimento ---------- */
