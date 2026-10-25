@@ -1,10 +1,13 @@
 // Mapa: OpenStreetMap (blocos) + Nominatim (endereço) + Overpass (pontos de reciclagem)
-const MN = { plastico: 'Plástico', papel: 'Papel', vidro: 'Vidro', metal: 'Metal' };
+const MN = { plastico: 'Plástico', papel: 'Papel', vidro: 'Vidro', metal: 'Metal', eletronico: 'Eletrônico', pilhas: 'Pilhas', organico: 'Orgânico'};
 const TG = {
   plastico: ['plastic', 'plastic_bottles', 'plastic_packaging'],
   papel: ['paper', 'cardboard', 'paper_packaging'],
   vidro: ['glass', 'glass_bottles'],
   metal: ['scrap_metal', 'cans', 'metal']
+  eletronico: ['electrical_items', 'small_appliances', 'small_electrical_appliances', 'electronics', 'computers', 'mobile_phones'],
+  pilhas: ['batteries', 'car_batteries'],
+  organico: ['organic', 'green_waste', 'garden_waste', 'food_waste', 'biowaste'],
 };
 const OVERPASS = [
   'https://overpass-api.de/api/interpreter',
