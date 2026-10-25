@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RadarEco · Resultado da análise</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=3">
+<style>[hidden]{display:none!important}</style>
+</head>
+<body>
+<header><div class="bar">
+ <a class="logo" href="index.html">▢ RadarEco</a>
+ <nav aria-label="Principal">
+  <a href="index.html">Início</a>
+  <a href="pontos-de-coleta.html">Pontos de Coleta</a>
+  <a href="sobre.html">Sobre</a>
+ </nav>
+ <a class="scan" href="escanear.html">Escanear Lixo</a>
+</div></header>
+
+<main>
+ <p class="eb">RESULTADO DA ANÁLISE</p>
+ <h1>Veja como descartar o seu item.</h1>
+ <p class="lead">Este resultado é uma simulação. A identificação real por IA ainda não foi ativada.</p>
+
+ <div class="grid2">
+  <div class="card">
+   <div class="drop"><i></i><i></i><i></i><i></i>
+    <img id="foto" alt="Foto analisada">
+   </div>
+   <p class="note" id="arq"></p>
+   <div class="btns">
+    <a class="btn p" href="escanear.html">Tirar outra foto</a>
+    <a class="btn s" href="index.html">Voltar ao início</a>
+   </div>
+   <button class="btn s" id="remover" type="button">Remover foto</button>
+  </div>
+
+  <div class="card">
+   <b style="font-size:12px;color:var(--g)">Análise concluída <span style="font-weight:400;color:var(--mute)">simulação</span></b>
+   <p class="note" style="margin-top:14px">Material provável</p>
+   <h2 style="font-size:26px" id="r-nome"></h2>
+   <p style="margin:8px 0 14px"><span class="chip" id="r-chip"></span><span class="ok" id="r-rec"></span></p>
+   <hr>
+   <b style="font-size:13px">Prepare para a coleta</b>
+   <ul class="cl" id="r-lista"></ul>
+   <a class="btn bl" id="r-pontos" href="pontos-de-coleta.html">Ver pontos de descarte</a>
+   <p class="note" style="margin-top:10px">A IA pode errar. Confira o símbolo na embalagem e as regras de aceitação do ponto de coleta.</p>
+  </div>
+ </div>
+
+ <div class="card alert warn" id="aviso" hidden><div class="ico">⚠</div><div>
+  <b>Este item exige cuidado especial.</b>
+  <p class="note">Pilhas e baterias não vão na coleta seletiva comum. Não abra, não perfure e não exponha ao calor. Procure um ponto de descarte específico.</p>
+ </div></div>
+</main>
+
+<footer><div>
+ <p>RadarEco · Pequenas escolhas. Um futuro mais limpo.</p>
+ <span><a href="sobre.html">Privacidade</a><a href="sobre.html">Acessibilidade</a><a href="mailto:contato@exemplo.com">Fale com a gente</a></span>
+</div></footer>
+
+<script src="js/analise.js?v=3"></script>
+<script src="js/resultado.js?v=3"></script>
+</body>
+</html>
