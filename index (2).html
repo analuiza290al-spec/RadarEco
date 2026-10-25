@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RadarEco · Cada resíduo tem um destino certo</title>
+<meta name="description" content="Fotografe um item, conheça o material e descubra onde descartá-lo.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♻️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
+<style>
+:root{--g:#1f8a1f;--gd:#176b17;--bg:#dbeed5;--card:#fff;--ink:#1c2a1c;--mute:#5d6f5d;--b:#00579b;--line:#cfe3c8;--or:#f6a85c;--r:12px}
+*{box-sizing:border-box;margin:0}
+body{font-family:Montserrat,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;font-size:15px}
+a{color:var(--b);font-weight:600;text-decoration:none}a:hover{text-decoration:underline}
+:focus-visible{outline:3px solid var(--b);outline-offset:2px}
+header{background:var(--g);color:#fff;position:sticky;top:0;z-index:5}
+.bar{max-width:1200px;margin:auto;padding:12px 24px;display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+.logo{font-weight:700;font-size:20px;color:#fff;display:flex;gap:8px;align-items:center}
+nav{display:flex;gap:22px;margin:0 auto}
+nav a{color:#fff;font-weight:600;padding:6px 0;border-bottom:3px solid transparent}
+nav a[aria-current=page]{border-color:#fff}
+.scan{border:1.5px solid #fff;border-radius:8px;padding:8px 16px;color:#fff;font-weight:600;font-size:14px}
+main{max-width:1200px;margin:auto;padding:32px 24px 40px}
+.eb{color:var(--b);font-size:11px;font-weight:700;letter-spacing:.04em}
+h1{font-size:clamp(26px,4vw,38px);line-height:1.15;margin:8px 0}
+h2{font-size:20px}
+.lead{color:var(--mute);max-width:60ch}
+.grid2{display:grid;grid-template-columns:1.25fr 1fr;gap:24px;margin-top:24px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.tag{font-size:12px;color:var(--b);font-weight:600}
+.drop{position:relative;margin:14px 0;border-radius:10px;overflow:hidden;background:#c9c3b8;aspect-ratio:16/9;display:grid;place-items:center}
+.drop img{width:100%;height:100%;object-fit:cover}
+.drop i{position:absolute;width:34px;height:34px;border:3px solid #fff;opacity:.9}
+.drop i:nth-of-type(1){top:12px;left:12px;border-right:0;border-bottom:0}.drop i:nth-of-type(2){top:12px;right:12px;border-left:0;border-bottom:0}
+.drop i:nth-of-type(3){bottom:12px;left:12px;border-right:0;border-top:0}.drop i:nth-of-type(4){bottom:12px;right:12px;border-left:0;border-top:0}
+.fn{position:absolute;left:44px;bottom:16px;background:#fff;border-radius:6px;padding:2px 8px;font-size:11px}
+.btns{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0 8px}
+.btn{font:600 15px Montserrat,sans-serif;border-radius:8px;padding:13px 16px;cursor:pointer;border:2px solid var(--g);text-align:center;display:block}
+.p{background:var(--g);color:#fff}.p:hover{background:var(--gd)}
+.s{background:#fff;color:var(--g)}.s:hover{background:#f1f9ee}
+.bl{background:var(--b);border-color:var(--b);color:#fff;width:100%}
+.note{font-size:12px;color:var(--mute)}
+.chip{display:inline-block;font-size:11px;font-weight:700;padding:2px 10px;border-radius:99px;background:var(--or)}
+.ok{font-size:12px;color:var(--g);font-weight:600;margin-left:8px}
+.cl{list-style:none;padding:0;margin:8px 0 16px;font-size:13px;color:#33433a}
+.cl li{padding-left:22px;position:relative;margin:4px 0}.cl li:before{content:"✓";position:absolute;left:0;color:var(--mute)}
+hr{border:0;border-top:1px solid var(--line);margin:14px 0}
+.alert{margin-top:24px;display:flex;gap:14px;align-items:flex-start;background:#eef7ea}
+.ico{flex:none;width:34px;height:34px;border-radius:8px;background:#fde6c8;display:grid;place-items:center;border:1px solid var(--or)}
+.map{background:#e8efe0;position:relative;min-height:440px}
+.mapwrap{display:grid;grid-template-columns:1.5fr 1fr;padding:0;overflow:hidden}
+.mapwrap svg{width:100%;height:100%;display:block;position:absolute;inset:0}
+.pin{position:absolute;transform:translate(-50%,-50%);width:26px;height:26px;border-radius:50%;background:var(--b);color:#fff;font:700 12px Montserrat;display:grid;place-items:center;border:2px solid #fff;cursor:pointer;box-shadow:0 1px 4px #0004}
+.pin[aria-pressed=true]{transform:translate(-50%,-50%) scale(1.3);background:#003d6e}
+.badge{position:absolute;top:12px;left:12px;background:#fff;border-radius:6px;padding:4px 10px;font-size:12px;font-weight:600}
+.side{padding:20px;display:flex;flex-direction:column;gap:12px}
+label{font-size:12px;font-weight:700}
+input[type=search]{width:100%;font:15px Montserrat;padding:11px 12px;border:2px solid var(--b);border-radius:8px;margin-top:6px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chips button{font:600 12px Montserrat;border:1.5px solid var(--line);background:#fff;border-radius:99px;padding:6px 14px;cursor:pointer}
+.chips button[aria-pressed=true]{background:var(--b);border-color:var(--b);color:#fff}
+.pt{width:100%;text-align:left;font:inherit;background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:12px;cursor:pointer;display:block;margin-bottom:10px}
+.pt[aria-pressed=true]{border:2px solid var(--b);background:#eaf3fb}
+.pt b{font-size:14px}.pt small{display:block;color:var(--mute);font-size:12px}
+.pt span{color:var(--b);font-weight:700;font-size:12px;float:right}
+.about{display:grid;grid-template-columns:1.3fr 1fr;gap:32px;margin-top:24px;align-items:start}
+.about p{color:#33433a;margin:10px 0}
+.photo{aspect-ratio:4/3;border-radius:var(--r);background:linear-gradient(135deg,#7fae6e,#3f7a3a 60%,#2c5a2c);display:grid;place-items:center;color:#ffffffb0;font-size:13px;text-align:center;padding:16px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:14px}
+.steps b{display:block;margin:12px 0 6px}.steps p{font-size:13px;color:var(--mute)}
+.n{float:right;font-size:12px;color:var(--mute)}
+footer{border-top:1px solid var(--line);font-size:12px;color:var(--mute)}
+footer div{max-width:1200px;margin:auto;padding:18px 24px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+footer span a{margin-left:20px}
+[hidden]{display:none!important}
+@media(max-width:860px){
+ .grid2,.about,.mapwrap{grid-template-columns:1fr}.steps{grid-template-columns:1fr}
+ .bar{padding:10px 16px;gap:12px}nav{order:3;width:100%;justify-content:space-around;margin:0}
+ .logo{margin-right:auto}main{padding:24px 16px}.map{min-height:300px}
+}
+@media(prefers-reduced-motion:no-preference){.pin{transition:transform .15s}}
+#map{z-index:0}.leaflet-container{font-family:Montserrat,sans-serif}
+.nm{width:26px;height:26px;border-radius:50%;background:var(--b);color:#fff;font:700 12px Montserrat;display:grid;place-items:center;border:2px solid #fff;box-shadow:0 1px 4px #0004}
+.nm.on{background:#003d6e;transform:scale(1.3)}
+#list{max-height:340px;overflow:auto}
+.sf{display:flex;gap:8px;margin-top:6px;flex-wrap:wrap}.sf input{flex:1 1 160px;margin:0;width:auto}
+.sf .btn{padding:9px 14px;font-size:13px;width:auto}
+</style>
+</head>
+<body>
+<header><div class="bar">
+ <a class="logo" href="#inicio">▢ RadarEco</a>
+ <nav aria-label="Principal">
+  <a href="#inicio" data-nav="inicio">Início</a>
+  <a href="#pontos" data-nav="pontos">Pontos de Coleta</a>
+  <a href="#sobre" data-nav="sobre">Sobre</a>
+ </nav>
+ <a class="scan" href="#inicio" id="top-scan">Escanear Lixo</a>
+</div></header>
+
+<main>
+<!-- INÍCIO -->
+<section id="inicio" data-view>
+ <p class="eb">DESCARTE CONSCIENTE, SEM COMPLICAÇÃO</p>
+ <h1>Cada resíduo tem um destino certo.</h1>
+ <p class="lead">Fotografe um item, conheça o material e descubra como descartá-lo com mais cuidado.</p>
+ <div class="grid2">
+  <div class="card">
+   <div class="row"><h2>O que vamos descartar hoje?</h2><span class="tag">Análise com IA</span></div>
+   <div class="drop"><i></i><i></i><i></i><i></i>
+    <svg viewBox="0 0 400 225" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" id="ph" aria-hidden="true"><rect width="400" height="225" fill="#c9c3b8"/><ellipse cx="200" cy="120" rx="90" ry="22" fill="#d9e3e8" transform="rotate(-20 200 120)"/><ellipse cx="260" cy="95" rx="22" ry="14" fill="#aac3d6" transform="rotate(-20 260 95)"/></svg>
+    <img id="prev" alt="Pré-visualização do item" hidden>
+    <span class="fn" id="fn">garrafa-pet.jpg · 1,2 MB</span>
+   </div>
+   <p class="note" id="cap">Imagem de exemplo: garrafa plástica transparente com tampa azul.</p>
+   <div class="btns">
+    <label class="btn p" for="cam">Tirar foto</label>
+    <label class="btn s" for="up">Enviar imagem</label>
+   </div>
+   <input id="cam" type="file" accept="image/*" capture="environment" hidden>
+   <input id="up" type="file" accept="image/jpeg,image/png,image/heic" hidden>
+   <p class="note">Um item por foto, com boa luz. JPG, PNG ou HEIC, até 10 MB.</p>
+  </div>
+  <div class="card" aria-live="polite">
+   <div class="row"><b style="font-size:12px;color:var(--g)">Análise concluída <span style="font-weight:400;color:var(--mute)">demonstração</span></b></div>
+   <p class="note" style="margin-top:14px">Material provável</p>
+   <h2 style="font-size:24px" id="mat">Garrafa PET</h2>
+   <p style="margin:8px 0 14px"><span class="chip">Plástico · PET 1</span><span class="ok">♻ Reciclável</span></p>
+   <hr>
+   <b style="font-size:13px">Prepare para a coleta</b>
+   <ul class="cl"><li>Esvazie a garrafa e retire os resíduos.</li><li>Deixe secar e mantenha a tampa junto.</li><li>Separe dos orgânicos e leve à coleta seletiva.</li></ul>
+   <a class="btn bl" href="#pontos">Ver pontos de descarte</a>
+   <p class="note" style="margin-top:10px">A IA pode errar. Confira o símbolo na embalagem e as regras de aceitação do ponto de coleta.</p>
+  </div>
+ </div>
+ <div class="card alert"><div class="ico">⚠</div><div><b>Pilhas, químicos ou objetos cortantes? Cuidado redobrado.</b><p class="note">Uma foto não confirma a segurança de um resíduo. Não abra nem manuseie itens desconhecidos; procure orientação especializada.</p></div></div>
+</section>
+
+<!-- PONTOS -->
+<section id="pontos" data-view hidden>
+ <p class="eb">DO MATERIAL AO DESTINO</p>
+ <h1>Encontre um ponto de coleta.</h1>
+ <p class="lead">Busque por região e veja onde entregar cada tipo de resíduo. Confirme a aceitação antes de sair.</p>
+ <div class="card mapwrap" style="margin-top:24px">
+  <div class="map" id="map" role="region" aria-label="Mapa de pontos de coleta"></div>
+  <div class="side">
+   <form id="sf"><label for="addr">Endereço, bairro ou CEP</label>
+   <div class="sf"><input id="addr" type="search" placeholder="Ex.: Pinheiros, São Paulo"><button class="btn p" type="submit">Buscar</button><button class="btn s" type="button" id="loc">Usar minha localização</button></div>
+   <p class="note" id="st" role="status" style="margin-top:8px">Digite um endereço ou use sua localização para ver pontos reais próximos.</p></form>
+   <div><label id="ml">Qual material você quer descartar?</label>
+    <div class="chips" role="group" aria-labelledby="ml" style="margin-top:8px" id="chips">
+     <button aria-pressed="true" data-m="plastico">Plástico</button><button aria-pressed="false" data-m="papel">Papel</button><button aria-pressed="false" data-m="vidro">Vidro</button><button aria-pressed="false" data-m="metal">Metal</button>
+    </div></div>
+   <div class="row note"><b id="cnt"></b><span>Mais próximos primeiro</span></div>
+   <div id="list"></div>
+  </div>
+ </div>
+ <p class="note" style="margin-top:12px">Pontos do OpenStreetMap, mapa colaborativo: podem estar incompletos ou desatualizados. Confirme horário e materiais aceitos antes de sair.</p>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre" data-view hidden>
+ <p class="eb">SOBRE O RADARECO</p>
+ <h1>Tecnologia a serviço de um cuidado coletivo.</h1>
+ <p class="lead">Informação acessível para transformar a dúvida sobre o lixo em uma escolha mais consciente.</p>
+ <div class="about">
+  <div>
+   <h2>O descarte certo começa com informação.</h2>
+   <p>O RadarEco é uma iniciativa ambiental que aproxima pessoas da coleta seletiva. Reunimos classificação de resíduos por imagem e orientação de descarte em uma experiência simples, para apoiar decisões do dia a dia.</p>
+   <p>Cada material separado com cuidado pode facilitar o trabalho de cooperativas e reduzir o que vai para os aterros. Nosso papel é ajudar você a entender o resíduo e encontrar um destino adequado — respeitando a realidade da sua região.</p>
+   <div class="card" style="margin-top:18px"><b>A IA orienta. A verificação continua essencial.</b><p class="note">A classificação é uma estimativa visual e pode falhar, especialmente em embalagens sujas ou materiais mistos. Ela não identifica com segurança substâncias perigosas. Para pilhas, químicos e resíduos de saúde, procure orientação especializada e nunca abra um item desconhecido.</p></div>
+  </div>
+  <div>
+   <div class="photo" role="img" aria-label="Espaço reservado para foto de mãos separando garrafas e papelão">Substitua por sua foto: mãos separando garrafas e papelão para reciclagem</div>
+   <h2 style="margin-top:22px">Pequenas escolhas. Um impacto que é de todos.</h2>
+   <p class="note" style="margin-top:6px">Mais clareza para você. Mais cuidado com quem coleta e com o meio ambiente.</p>
+  </div>
+ </div>
+ <div class="row" style="margin-top:34px"><h2>Como funciona</h2><span class="note">Três passos para um descarte mais consciente.</span></div>
+ <div class="steps">
+  <div class="card"><span class="n">01</span>📷<b>Fotografe um resíduo</b><p>Tire uma foto ou envie uma imagem nítida. Enquadre apenas um item por vez, em um local bem iluminado.</p></div>
+  <div class="card"><span class="n">02</span>🔍<b>Confira a orientação</b><p>A IA sugere o material e os cuidados de preparo. Compare o resultado com o rótulo e o símbolo da embalagem.</p></div>
+  <div class="card"><span class="n">03</span>📍<b>Encontre o destino</b><p>Consulte os pontos de coleta, confirme o que recebem e leve seu resíduo separado para o descarte adequado.</p></div>
+ </div>
+</section>
+</main>
+
+<footer><div><p>RadarEco · Pequenas escolhas. Um futuro mais limpo.</p><span><a href="#sobre">Privacidade</a><a href="#sobre">Acessibilidade</a><a href="mailto:contato@exemplo.com">Fale com a gente</a></span></div></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+<script>
+// Rotas por hash (funciona no GitHub Pages sem configuração)
+const views=[...document.querySelectorAll('[data-view]')];
+function route(){
+  const id=(location.hash||'#inicio').slice(1);
+  const cur=views.some(v=>v.id===id)?id:'inicio';
+  views.forEach(v=>v.hidden=v.id!==cur);
+  document.querySelectorAll('[data-nav]').forEach(a=>a.dataset.nav===cur?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current'));
+  document.title='RadarEco · '+({inicio:'Início',pontos:'Pontos de Coleta',sobre:'Sobre'})[cur];
+  scrollTo(0,0);
+  if(cur==='pontos')setTimeout(showMap,0);
+}
+addEventListener('hashchange',route);route();
+
+// Upload / câmera (pré-visualização local; nenhuma imagem sai do navegador)
+function onFile(e){
+  const f=e.target.files[0];if(!f)return;
+  if(f.size>10*1024*1024){alert('A imagem passa de 10 MB. Escolha um arquivo menor.');return}
+  const img=document.getElementById('prev');
+  if(f.type.startsWith('image/')&&!/heic/i.test(f.type)){img.src=URL.createObjectURL(f);img.hidden=false;document.getElementById('ph').hidden=true}
+  document.getElementById('fn').textContent=f.name+' · '+(f.size/1048576).toFixed(1).replace('.',',')+' MB';
+  document.getElementById('cap').textContent='Análise de demonstração: a classificação real exige uma API de IA.';
+}
+cam.onchange=up.onchange=onFile;
+
+// Pontos de coleta reais: OpenStreetMap (mapa e geocodificação) + Overpass (pontos de reciclagem)
+const MN={plastico:'Plástico',papel:'Papel',vidro:'Vidro',metal:'Metal'};
+const TG={plastico:['plastic','plastic_bottles','plastic_packaging'],papel:['paper','cardboard','paper_packaging'],vidro:['glass','glass_bottles'],metal:['scrap_metal','cans','metal']};
+let mat='plastico',sel=0,all=[],cur=[],map,layer,me,center=[-23.5505,-46.6333];
+const $=id=>document.getElementById(id);
+const esc=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt=d=>d<1?Math.round(d*1000)+' m':d.toFixed(1).replace('.',',')+' km';
+const dist=(a,b,c,d)=>{const r=Math.PI/180,x=Math.sin((c-a)*r/2)**2+Math.cos(a*r)*Math.cos(c*r)*Math.sin((d-b)*r/2)**2;return 12742*Math.asin(Math.sqrt(x))};
+const status=t=>$('st').textContent=t;
+
+function showMap(){
+  if(!map){
+    map=L.map('map').setView(center,12);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
+    layer=L.layerGroup().addTo(map);
+    render();
+  }else map.invalidateSize();
+}
+async function load(lat,lon){
+  center=[lat,lon];map.setView(center,14);
+  if(me)me.remove();
+  me=L.circleMarker(center,{radius:8,color:'#fff',weight:3,fillColor:'#00579b',fillOpacity:1}).addTo(map).bindTooltip('Você está aqui');
+  status('Buscando pontos de coleta…');
+  try{
+    const q=`[out:json][timeout:25];nwr["amenity"="recycling"](around:6000,${lat},${lon});out center tags 200;`;
+    const r=await fetch('https://overpass-api.de/api/interpreter',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'data='+encodeURIComponent(q)});
+    if(!r.ok)throw 0;
+    const j=await r.json();
+    all=j.elements.map(e=>{const t=e.tags||{},la=e.lat??e.center?.lat,lo=e.lon??e.center?.lon;
+      const m=Object.keys(TG).filter(k=>TG[k].some(x=>t['recycling:'+x]==='yes'));
+      return{n:t.name||t.operator||'Ponto de reciclagem',lat:la,lon:lo,t,m,d:dist(lat,lon,la,lo)}}).filter(p=>p.lat!=null).sort((a,b)=>a.d-b.d);
+    sel=0;status(all.length?'':'Nenhum ponto encontrado em 6 km. Tente outra região.');
+  }catch(_){all=[];status('Não foi possível carregar os pontos agora. Tente de novo em instantes.')}
+  render(true);
+}
+function render(fit){
+  cur=all.filter(p=>p.m.includes(mat)||!p.m.length).slice(0,8);
+  if(sel>=cur.length)sel=0;
+  $('cnt').textContent=cur.length+(cur.length===1?' ponto encontrado':' pontos encontrados');
+  $('list').innerHTML=cur.map((p,i)=>`<button class="pt" data-i="${i}" aria-pressed="${i===sel}"><span>${fmt(p.d)}</span><b>${i+1}. ${esc(p.n)}</b><small>${p.m.length?p.m.map(k=>MN[k]).join(', '):'Materiais não informados'}</small></button>`+(i===sel?`<p class="note" style="margin:-4px 0 10px">${p.t.opening_hours?'Horário: '+esc(p.t.opening_hours)+' · ':''}<a href="https://www.openstreetmap.org/directions?to=${p.lat}%2C${p.lon}" target="_blank" rel="noopener">Traçar rota</a></p>`:'')).join('');
+  if(!map)return;
+  layer.clearLayers();
+  cur.forEach((p,i)=>L.marker([p.lat,p.lon],{title:p.n,icon:L.divIcon({className:'',html:`<div class="nm${i===sel?' on':''}">${i+1}</div>`,iconSize:[26,26]})}).addTo(layer).on('click',()=>{sel=i;render()}));
+  if(fit&&cur.length)map.fitBounds(L.latLngBounds([center,...cur.map(p=>[p.lat,p.lon])]),{padding:[40,40],maxZoom:16});
+  else if(cur[sel])map.panTo([cur[sel].lat,cur[sel].lon]);
+}
+document.addEventListener('click',e=>{
+  const t=e.target.closest('.pt');if(t){sel=+t.dataset.i;render();return}
+  const c=e.target.closest('#chips button');if(c){mat=c.dataset.m;sel=0;chips.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b===c));render(true)}
+});
+$('sf').onsubmit=async e=>{e.preventDefault();const q=$('addr').value.trim();if(!q)return;
+  status('Procurando endereço…');
+  try{const r=await fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&accept-language=pt-BR&q='+encodeURIComponent(q));
+    const j=await r.json();if(!j.length)return status('Endereço não encontrado. Tente bairro e cidade.');
+    load(+j[0].lat,+j[0].lon)}catch(_){status('Não foi possível buscar o endereço agora.')}};
+$('loc').onclick=()=>{if(!navigator.geolocation)return status('Seu navegador não oferece localização.');
+  status('Obtendo sua localização…');
+  navigator.geolocation.getCurrentPosition(p=>load(p.coords.latitude,p.coords.longitude),()=>status('Permissão negada. Digite um endereço para buscar.'),{timeout:10000})};
+</script>
+</body>
+</html>
