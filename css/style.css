@@ -103,5 +103,9 @@ footer span a{margin-left:20px}
 .scan[aria-current=page]{background:#ffffff22}
 button.btn{width:100%}
 [hidden]{display:none!important}
+
+
+.photo-fig img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:var(--r);display:block}
+.photo-fig figcaption{margin-top:6px}
  
 }
