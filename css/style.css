@@ -96,4 +96,12 @@ footer span a{margin-left:20px}
  nav{order:3;width:100%;justify-content:space-around;margin:0}
  main{padding:24px 16px}
  #map{min-height:320px}
+
+ /* Escanear */
+.drop video{width:100%;height:100%;object-fit:cover;background:#000}
+.drop.cam{aspect-ratio:4/3;background:#1c2a1c}
+.scan[aria-current=page]{background:#ffffff22}
+button.btn{width:100%}
+[hidden]{display:none!important}
+ 
 }
