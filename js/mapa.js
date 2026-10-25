@@ -145,6 +145,13 @@ $('loc').addEventListener('click', () => {
   );
 });
 
+// Material vindo da análise (?m=plastico)
+const pm = new URLSearchParams(location.search).get('m');
+if (pm && MN[pm]) {
+  mat = pm;
+  $('chips').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b.dataset.m === pm));
+}
+
 // Início: mostra pontos reais no centro de São Paulo
 render();
 load(center[0], center[1], 'Mostrando a região central de São Paulo. Busque seu endereço ou use sua localização.');
