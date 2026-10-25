@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RadarEco - Cada resíduo tem um destino certo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="icone-logo.svg" alt="" aria-hidden="true" width="24"> <!-- Substitua pelo seu ícone -->
+            RadarEco
+        </div>
+        <nav class="nav-links">
+            <a href="index.html" class="active">Início</a>
+            <a href="pontos-de-coleta.html">Pontos de Coleta</a>
+            <a href="sobre.html">Sobre</a>
+        </nav>
+        <button class="btn btn-outline">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h3m10 0h3v3M4 17v3h3m10 0h3v-3"/></svg>
+            Escanear Lixo
+        </button>
+    </header>
+
+    <main class="container">
+        <section class="hero-section">
+            <p class="subtitle">DESCARTE CONSCIENTE, SEM COMPLICAÇÃO</p>
+            <h1 class="title">Cada resíduo tem um destino certo.</h1>
+            <p class="description">Fotografe um item, conheça o material e descubra como descartá-lo com mais cuidado.</p>
+        </section>
+
+        <div class="scanner-layout">
+            <!-- Área de Upload/Câmera -->
+            <div class="card upload-area">
+                <div class="card-header">
+                    <h2>O que vamos descartar hoje?</h2>
+                    <span class="ai-badge">✨ Análise com IA</span>
+                </div>
+                <div class="viewfinder">
+                    <!-- Substitua pela imagem da garrafa exportada do Figma -->
+                    <img src="garrafa-pet.jpg" alt="Garrafa plástica transparente amassada"> 
+                </div>
+                <div class="action-buttons">
+                    <button class="btn btn-primary">
+                        Tirar foto
+                    </button>
+                    <button class="btn btn-outline-primary">
+                        Enviar imagem
+                    </button>
+                </div>
+                <div class="warning-box">
+                    <span class="warning-icon">!</span>
+                    <div>
+                        <strong>Pilhas, químicos ou objetos cortantes? Cuidado redobrado.</strong>
+                        <p>Uma foto não confirma a segurança de um resíduo. Não abra nem manuseie itens desconhecidos; procure orientação especializada.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Área de Resultado -->
+            <div class="card result-area">
+                <div class="card-header">
+                    <span class="status-badge">✓ Análise concluída</span>
+                    <span class="demo-tag">- demonstração</span>
+                </div>
+                <p class="material-label">Material provável</p>
+                <h2 class="result-title">Garrafa PET</h2>
+                
+                <div class="tags">
+                    <span class="tag tag-orange">Plástico - PET 1</span>
+                    <span class="tag tag-green">♻️ Reciclável</span>
+                </div>
+
+                <div class="preparation-steps">
+                    <h3>Prepare para a coleta</h3>
+                    <ul>
+                        <li>Esvazie a garrafa e retire os resíduos.</li>
+                        <li>Deixe secar e mantenha a tampa junto.</li>
+                        <li>Separe dos orgânicos e leve à coleta seletiva.</li>
+                    </ul>
+                </div>
+
+                <button class="btn btn-secondary full-width">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    Ver pontos de descarte
+                </button>
+                
+                <p class="disclaimer">A IA pode errar. Confira o símbolo na embalagem e as regras de aceitação do ponto de coleta.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>RadarEco - Pequenas escolhas. Um futuro mais limpo.</p>
+        <div class="footer-links">
+            <a href="#">Privacidade</a>
+            <a href="#">Acessibilidade</a>
+            <a href="#">Fale com a gente</a>
+        </div>
+    </footer>
+</body>
+</html>
