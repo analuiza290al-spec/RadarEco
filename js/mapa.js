@@ -1,18 +1,24 @@
 // Mapa: OpenStreetMap (blocos) + Nominatim (endereço) + Overpass (pontos de reciclagem)
-const MN = { plastico: 'Plástico', papel: 'Papel', vidro: 'Vidro', metal: 'Metal', eletronico: 'Eletrônico', pilhas: 'Pilhas', organico: 'Orgânico'};
+const MN = {
+  plastico: 'Plástico', papel: 'Papel', vidro: 'Vidro', metal: 'Metal',
+  eletronico: 'Eletrônico', pilhas: 'Pilhas', organico: 'Orgânico', oleo: 'Óleo', roupas: 'Roupas'
+};
 const TG = {
   plastico: ['plastic', 'plastic_bottles', 'plastic_packaging'],
   papel: ['paper', 'cardboard', 'paper_packaging'],
   vidro: ['glass', 'glass_bottles'],
-  metal: ['scrap_metal', 'cans', 'metal']
+  metal: ['scrap_metal', 'cans', 'metal'],
   eletronico: ['electrical_items', 'small_appliances', 'small_electrical_appliances', 'electronics', 'computers', 'mobile_phones'],
   pilhas: ['batteries', 'car_batteries'],
   organico: ['organic', 'green_waste', 'garden_waste', 'food_waste', 'biowaste'],
+  oleo: ['cooking_oil', 'engine_oil'],
+  roupas: ['clothes', 'shoes', 'textiles']
 };
 const OVERPASS = [
   'https://overpass-api.de/api/interpreter',
   'https://overpass.kumi.systems/api/interpreter'
 ];
+const VAZIO = 'Nenhum ponto com esse material nesta região. Procure o programa de coleta da sua prefeitura.';
 
 const $ = id => document.getElementById(id);
 const esc = t => String(t).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -87,6 +93,10 @@ function render(fit) {
   cur = all.filter(p => p.m.includes(mat) || !p.m.length).slice(0, 8);
   if (sel >= cur.length) sel = 0;
   $('cnt').textContent = cur.length + (cur.length === 1 ? ' ponto encontrado' : ' pontos encontrados');
+
+  // Mensagem útil quando o material não tem pontos na região
+  if (all.length && !cur.length) status(VAZIO);
+  else if ($('st').textContent === VAZIO) status('');
 
   $('list').innerHTML = cur.map((p, i) =>
     `<button class="pt" type="button" data-i="${i}" aria-pressed="${i === sel}">
