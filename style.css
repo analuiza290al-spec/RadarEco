@@ -1,0 +1,99 @@
+:root{--g:#1f8a1f;--gd:#176b17;--bg:#dbeed5;--card:#fff;--ink:#1c2a1c;--mute:#5d6f5d;--b:#00579b;--line:#cfe3c8;--or:#f6a85c;--r:12px}
+*{box-sizing:border-box;margin:0}
+body{font-family:Montserrat,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;font-size:15px}
+a{color:var(--b);font-weight:600;text-decoration:none}a:hover{text-decoration:underline}
+:focus-visible{outline:3px solid var(--b);outline-offset:2px}
+
+/* Cabeçalho */
+header{background:var(--g);color:#fff;position:sticky;top:0;z-index:1000}
+.bar{max-width:1200px;margin:auto;padding:12px 24px;display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+.logo{font-weight:700;font-size:20px;color:#fff;margin-right:auto}
+.logo:hover{text-decoration:none}
+nav{display:flex;gap:22px;margin:0 auto}
+nav a{color:#fff;padding:6px 0;border-bottom:3px solid transparent}
+nav a:hover{text-decoration:none}
+nav a[aria-current=page]{border-color:#fff}
+.scan{border:1.5px solid #fff;border-radius:8px;padding:8px 16px;color:#fff;font-size:14px}
+.scan:hover{text-decoration:none;background:#ffffff22}
+
+/* Conteúdo */
+main{max-width:1200px;margin:auto;padding:32px 24px 40px}
+.eb{color:var(--b);font-size:11px;font-weight:700;letter-spacing:.04em}
+h1{font-size:clamp(26px,4vw,38px);line-height:1.15;margin:8px 0}
+h2{font-size:20px}
+.lead{color:var(--mute);max-width:60ch}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.note{font-size:12px;color:var(--mute)}
+.tag{font-size:12px;color:var(--b);font-weight:600}
+hr{border:0;border-top:1px solid var(--line);margin:14px 0}
+
+/* Botões */
+.btn{font:600 15px Montserrat,sans-serif;border-radius:8px;padding:13px 16px;cursor:pointer;border:2px solid var(--g);text-align:center;display:block}
+.btn:hover{text-decoration:none}
+.p{background:var(--g);color:#fff}.p:hover{background:var(--gd)}
+.s{background:#fff;color:var(--g)}.s:hover{background:#f1f9ee}
+.bl{background:var(--b);border-color:var(--b);color:#fff;width:100%}
+
+/* Início */
+.grid2{display:grid;grid-template-columns:1.25fr 1fr;gap:24px;margin-top:24px}
+.drop{position:relative;margin:14px 0;border-radius:10px;overflow:hidden;background:#c9c3b8;aspect-ratio:16/9;display:grid;place-items:center}
+.drop img,.drop svg{width:100%;height:100%;object-fit:cover}
+.drop i{position:absolute;width:34px;height:34px;border:3px solid #fff;opacity:.9}
+.drop i:nth-of-type(1){top:12px;left:12px;border-right:0;border-bottom:0}
+.drop i:nth-of-type(2){top:12px;right:12px;border-left:0;border-bottom:0}
+.drop i:nth-of-type(3){bottom:12px;left:12px;border-right:0;border-top:0}
+.drop i:nth-of-type(4){bottom:12px;right:12px;border-left:0;border-top:0}
+.fn{position:absolute;left:44px;bottom:16px;background:#fff;border-radius:6px;padding:2px 8px;font-size:11px}
+.btns{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0 8px}
+.chip{display:inline-block;font-size:11px;font-weight:700;padding:2px 10px;border-radius:99px;background:var(--or)}
+.ok{font-size:12px;color:var(--g);font-weight:600;margin-left:8px}
+.cl{list-style:none;padding:0;margin:8px 0 16px;font-size:13px;color:#33433a}
+.cl li{padding-left:22px;position:relative;margin:4px 0}
+.cl li:before{content:"✓";position:absolute;left:0;color:var(--mute)}
+.alert{margin-top:24px;display:flex;gap:14px;align-items:flex-start;background:#eef7ea}
+.ico{flex:none;width:34px;height:34px;border-radius:8px;background:#fde6c8;display:grid;place-items:center;border:1px solid var(--or)}
+
+/* Pontos de coleta */
+.mapwrap{display:grid;grid-template-columns:1.5fr 1fr;padding:0;overflow:hidden;margin-top:24px}
+#map{height:100%;min-height:460px;z-index:0;background:#e8efe0}
+.leaflet-container{font-family:Montserrat,sans-serif}
+.side{padding:20px;display:flex;flex-direction:column;gap:12px}
+label{font-size:12px;font-weight:700}
+.sf{display:flex;gap:8px;margin-top:6px;flex-wrap:wrap}
+.sf input{flex:1 1 160px;font:15px Montserrat;padding:11px 12px;border:2px solid var(--b);border-radius:8px}
+.sf .btn{padding:9px 14px;font-size:13px;width:auto}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.chips button{font:600 12px Montserrat;border:1.5px solid var(--line);background:#fff;border-radius:99px;padding:6px 14px;cursor:pointer}
+.chips button[aria-pressed=true]{background:var(--b);border-color:var(--b);color:#fff}
+#list{max-height:340px;overflow:auto}
+.pt{width:100%;text-align:left;font:inherit;background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:12px;cursor:pointer;display:block;margin-bottom:10px}
+.pt[aria-pressed=true]{border:2px solid var(--b);background:#eaf3fb}
+.pt b{font-size:14px}
+.pt small{display:block;color:var(--mute);font-size:12px}
+.pt span{color:var(--b);font-weight:700;font-size:12px;float:right}
+.nm{width:26px;height:26px;border-radius:50%;background:var(--b);color:#fff;font:700 12px Montserrat;display:grid;place-items:center;border:2px solid #fff;box-shadow:0 1px 4px #0004}
+.nm.on{background:#003d6e;transform:scale(1.3)}
+
+/* Sobre */
+.about{display:grid;grid-template-columns:1.3fr 1fr;gap:32px;margin-top:24px;align-items:start}
+.about p{color:#33433a;margin:10px 0}
+.photo{aspect-ratio:4/3;border-radius:var(--r);background:linear-gradient(135deg,#7fae6e,#3f7a3a 60%,#2c5a2c);display:grid;place-items:center;color:#ffffffb0;font-size:13px;text-align:center;padding:16px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:14px}
+.steps b{display:block;margin:12px 0 6px}
+.steps p{font-size:13px;color:var(--mute)}
+.n{float:right;font-size:12px;color:var(--mute)}
+
+/* Rodapé */
+footer{border-top:1px solid var(--line);font-size:12px;color:var(--mute)}
+footer div{max-width:1200px;margin:auto;padding:18px 24px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+footer span a{margin-left:20px}
+
+/* Mobile */
+@media(max-width:860px){
+ .grid2,.about,.mapwrap,.steps{grid-template-columns:1fr}
+ .bar{padding:10px 16px;gap:12px}
+ nav{order:3;width:100%;justify-content:space-around;margin:0}
+ main{padding:24px 16px}
+ #map{min-height:320px}
+}
