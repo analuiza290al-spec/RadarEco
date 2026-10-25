@@ -27,21 +27,55 @@
  <p class="lead">Fotografe um item, conheça o material e descubra como descartá-lo com mais cuidado.</p>
 
  <div class="grid2">
-  <div class="card">
-   <div class="row"><h2>O que vamos descartar hoje?</h2><span class="tag">Análise com IA</span></div>
-   <div class="drop"><i></i><i></i><i></i><i></i>
-    <svg id="ph" viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="400" height="225" fill="#c9c3b8"/><ellipse cx="200" cy="120" rx="90" ry="22" fill="#d9e3e8" transform="rotate(-20 200 120)"/><ellipse cx="260" cy="95" rx="22" ry="14" fill="#aac3d6" transform="rotate(-20 260 95)"/></svg>
-    <img id="prev" alt="Pré-visualização do item" hidden>
-    <span class="fn" id="fn">garrafa-pet.jpg · 1,2 MB</span>
-   </div>
-   <p class="note" id="cap">Imagem de exemplo: garrafa plástica transparente com tampa azul.</p>
-   <div class="btns">
-     <a class="btn p" href="escanear.html">Tirar foto</a>
-     <label class="btn s" for="up">Enviar imagem</label>
-   </div>
-   <input id="up" type="file" accept="image/*" hidden>
-   <p class="note">Um item por foto, com boa luz. JPG, PNG ou HEIC, até 10 MB.</p>
+ <div class="card">
+  <div class="row"><h2>O que vamos descartar hoje?</h2><span class="tag">Análise com IA</span></div>
+  <div class="drop" id="drop"><i></i><i></i><i></i><i></i>
+   <p class="drop-empty" id="empty">Nenhuma imagem ainda.<br>Tire uma foto ou envie um arquivo.</p>
+   <img id="prev" alt="Pré-visualização do item" hidden>
+   <span class="fn" id="fn" hidden></span>
   </div>
+  <p class="note" id="cap">Um item por foto, com boa luz.</p>
+  <div class="btns">
+   <a class="btn p" href="escanear.html">Tirar foto</a>
+   <label class="btn s" for="up">Enviar imagem</label>
+  </div>
+  <button class="btn s" id="clear" type="button" hidden style="margin-bottom:8px">Remover foto</button>
+  <input id="up" type="file" accept="image/*" hidden>
+  <p class="note">JPG, PNG ou WebP, até 10 MB.</p>
+ </div>
+
+ <div id="side" aria-live="polite">
+  <!-- 1. Antes da imagem -->
+  <div class="card side-empty" id="wait">
+   <div class="ico">📷</div>
+   <h2 style="font-size:18px;margin-top:12px">Aguardando imagem</h2>
+   <p class="note" style="margin-top:6px">Envie ou tire uma foto de um resíduo. A orientação de descarte aparece aqui.</p>
+  </div>
+
+  <!-- 2. Analisando -->
+  <div class="card side-empty" id="loading" hidden>
+   <div class="spin" aria-hidden="true"></div>
+   <h2 style="font-size:18px;margin-top:12px">Analisando…</h2>
+  </div>
+
+  <!-- 3. Resultado (só depois da imagem) -->
+  <div class="card" id="result" hidden>
+   <b style="font-size:12px;color:var(--g)">Análise concluída <span style="font-weight:400;color:var(--mute)">demonstração</span></b>
+   <p class="note" style="margin-top:14px">Material provável</p>
+   <h2 style="font-size:24px">Garrafa PET</h2>
+   <p style="margin:8px 0 14px"><span class="chip">Plástico · PET 1</span><span class="ok">♻ Reciclável</span></p>
+   <hr>
+   <b style="font-size:13px">Prepare para a coleta</b>
+   <ul class="cl">
+    <li>Esvazie a garrafa e retire os resíduos.</li>
+    <li>Deixe secar e mantenha a tampa junto.</li>
+    <li>Separe dos orgânicos e leve à coleta seletiva.</li>
+   </ul>
+   <a class="btn bl" href="pontos-de-coleta.html">Ver pontos de descarte</a>
+   <p class="note" style="margin-top:10px">A IA pode errar. Confira o símbolo na embalagem e as regras de aceitação do ponto de coleta.</p>
+  </div>
+ </div>
+</div>
 
   <div class="card" aria-live="polite">
    <b style="font-size:12px;color:var(--g)">Análise concluída <span style="font-weight:400;color:var(--mute)">demonstração</span></b>
