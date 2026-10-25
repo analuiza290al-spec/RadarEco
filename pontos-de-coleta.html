@@ -4,9 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pontos de Coleta - RadarEco</title>
+    
+    <!-- Fontes Poppins e Montserrat -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    
+    <!-- CSS do Leaflet para o mapa nativo -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <!-- Arquivo de estilos do projeto -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Script do Leaflet para o mapa nativo -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body>
@@ -27,9 +35,11 @@
     </header>
 
     <main class="container">
-        <div id="mapa-radareco" style="height: 100%; width: 100%; border-radius: 12px; z-index: 1;">
-            
-        </div>
+        <div class="map-layout">
+            <!-- Área do Mapa Nativo -->
+            <div class="map-area card" style="padding: 0; overflow: hidden;">
+                <div id="mapa-radareco" style="height: 100%; width: 100%; border-radius: 12px; z-index: 1;"></div>
+            </div>
 
             <!-- Barra Lateral -->
             <div class="sidebar">
@@ -77,32 +87,43 @@
                         </div>
                         <span class="distance">1,4 km</span>
                     </div>
+
+                    <div class="location-card">
+                        <div class="loc-info">
+                            <span class="loc-number">3</span>
+                            <div>
+                                <h3>Ponto Circular do Parque</h3>
+                                <p>Ter-Dom - 8h às 16h</p>
+                                <small>Plástico, vidro e eletrônicos</small>
+                            </div>
+                        </div>
+                        <span class="distance">2,1 km</span>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
-    
-<script>
-    // Inicializa o mapa e define a coordenada central e o nível de zoom
-    // Substitua os valores pelos da sua cidade/região
-    var map = L.map('mapa-radareco').setView([-3.7319, -38.5267], 13); 
 
-    // Carrega o visual do mapa (OpenStreetMap)
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '© OpenStreetMap'
-    }).addTo(map);
+    <!-- Script de Inicialização do Mapa -->
+    <script>
+        // Inicializa o mapa e define a coordenada central e o nível de zoom
+        var map = L.map('mapa-radareco').setView([-3.7319, -38.5267], 13); 
 
-    // Adiciona os pinos dos ecopontos com popups de informação
-    var ponto1 = L.marker([-3.7319, -38.5267]).addTo(map);
-    ponto1.bindPopup("<b>Ecoponto Vila Verde</b><br>Plástico, papel, vidro e metal.");
+        // Carrega o visual do mapa (OpenStreetMap)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
 
-    var ponto2 = L.marker([-3.7400, -38.5300]).addTo(map);
-    ponto2.bindPopup("<b>Cooperativa Novo Ciclo</b><br>Plástico, papel e metal.");
+        // Adiciona os pinos dos ecopontos com popups de informação
+        var ponto1 = L.marker([-3.7319, -38.5267]).addTo(map);
+        ponto1.bindPopup("<b>Ecoponto Vila Verde</b><br>Plástico, papel, vidro e metal.");
 
-    var ponto3 = L.marker([-3.7250, -38.5150]).addTo(map);
-    ponto3.bindPopup("<b>Ponto Circular do Parque</b><br>Plástico, vidro e eletrónicos.");
-</script>
-    
+        var ponto2 = L.marker([-3.7400, -38.5300]).addTo(map);
+        ponto2.bindPopup("<b>Cooperativa Novo Ciclo</b><br>Plástico, papel e metal.");
+
+        var ponto3 = L.marker([-3.7250, -38.5150]).addTo(map);
+        ponto3.bindPopup("<b>Ponto Circular do Parque</b><br>Plástico, vidro e eletrônicos.");
+    </script>
 </body>
 </html>
