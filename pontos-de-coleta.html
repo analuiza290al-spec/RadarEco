@@ -81,5 +81,28 @@
             </div>
         </div>
     </main>
+    
+<script>
+    // Inicializa o mapa e define a coordenada central e o nível de zoom
+    // Substitua os valores pelos da sua cidade/região
+    var map = L.map('mapa-radareco').setView([-3.7319, -38.5267], 13); 
+
+    // Carrega o visual do mapa (OpenStreetMap)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    // Adiciona os pinos dos ecopontos com popups de informação
+    var ponto1 = L.marker([-3.7319, -38.5267]).addTo(map);
+    ponto1.bindPopup("<b>Ecoponto Vila Verde</b><br>Plástico, papel, vidro e metal.");
+
+    var ponto2 = L.marker([-3.7400, -38.5300]).addTo(map);
+    ponto2.bindPopup("<b>Cooperativa Novo Ciclo</b><br>Plástico, papel e metal.");
+
+    var ponto3 = L.marker([-3.7250, -38.5150]).addTo(map);
+    ponto3.bindPopup("<b>Ponto Circular do Parque</b><br>Plástico, vidro e eletrónicos.");
+</script>
+    
 </body>
 </html>
