@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RadarEco · Início</title>
+<meta name="description" content="Fotografe um item, conheça o material e descubra onde descartá-lo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header><div class="bar">
+ <a class="logo" href="index.html">▢ RadarEco</a>
+ <nav aria-label="Principal">
+  <a href="index.html" aria-current="page">Início</a>
+  <a href="pontos-de-coleta.html">Pontos de Coleta</a>
+  <a href="sobre.html">Sobre</a>
+ </nav>
+ <a class="scan" href="index.html">Escanear Lixo</a>
+</div></header>
+
+<main>
+ <p class="eb">DESCARTE CONSCIENTE, SEM COMPLICAÇÃO</p>
+ <h1>Cada resíduo tem um destino certo.</h1>
+ <p class="lead">Fotografe um item, conheça o material e descubra como descartá-lo com mais cuidado.</p>
+
+ <div class="grid2">
+  <div class="card">
+   <div class="row"><h2>O que vamos descartar hoje?</h2><span class="tag">Análise com IA</span></div>
+   <div class="drop"><i></i><i></i><i></i><i></i>
+    <svg id="ph" viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="400" height="225" fill="#c9c3b8"/><ellipse cx="200" cy="120" rx="90" ry="22" fill="#d9e3e8" transform="rotate(-20 200 120)"/><ellipse cx="260" cy="95" rx="22" ry="14" fill="#aac3d6" transform="rotate(-20 260 95)"/></svg>
+    <img id="prev" alt="Pré-visualização do item" hidden>
+    <span class="fn" id="fn">garrafa-pet.jpg · 1,2 MB</span>
+   </div>
+   <p class="note" id="cap">Imagem de exemplo: garrafa plástica transparente com tampa azul.</p>
+   <div class="btns">
+    <label class="btn p" for="cam">Tirar foto</label>
+    <label class="btn s" for="up">Enviar imagem</label>
+   </div>
+   <input id="cam" type="file" accept="image/*" capture="environment" hidden>
+   <input id="up" type="file" accept="image/jpeg,image/png,image/heic" hidden>
+   <p class="note">Um item por foto, com boa luz. JPG, PNG ou HEIC, até 10 MB.</p>
+  </div>
+
+  <div class="card" aria-live="polite">
+   <b style="font-size:12px;color:var(--g)">Análise concluída <span style="font-weight:400;color:var(--mute)">demonstração</span></b>
+   <p class="note" style="margin-top:14px">Material provável</p>
+   <h2 style="font-size:24px">Garrafa PET</h2>
+   <p style="margin:8px 0 14px"><span class="chip">Plástico · PET 1</span><span class="ok">♻ Reciclável</span></p>
+   <hr>
+   <b style="font-size:13px">Prepare para a coleta</b>
+   <ul class="cl">
+    <li>Esvazie a garrafa e retire os resíduos.</li>
+    <li>Deixe secar e mantenha a tampa junto.</li>
+    <li>Separe dos orgânicos e leve à coleta seletiva.</li>
+   </ul>
+   <a class="btn bl" href="pontos-de-coleta.html">Ver pontos de descarte</a>
+   <p class="note" style="margin-top:10px">A IA pode errar. Confira o símbolo na embalagem e as regras de aceitação do ponto de coleta.</p>
+  </div>
+ </div>
+
+ <div class="card alert"><div class="ico">⚠</div><div>
+  <b>Pilhas, químicos ou objetos cortantes? Cuidado redobrado.</b>
+  <p class="note">Uma foto não confirma a segurança de um resíduo. Não abra nem manuseie itens desconhecidos; procure orientação especializada.</p>
+ </div></div>
+</main>
+
+<footer><div>
+ <p>RadarEco · Pequenas escolhas. Um futuro mais limpo.</p>
+ <span><a href="sobre.html">Privacidade</a><a href="sobre.html">Acessibilidade</a><a href="mailto:contato@exemplo.com">Fale com a gente</a></span>
+</div></footer>
+
+<script src="js/inicio.js"></script>
+</body>
+</html>
