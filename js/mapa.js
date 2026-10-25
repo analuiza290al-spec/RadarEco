@@ -26,6 +26,13 @@ function dist(la1, lo1, la2, lo2) {
 let mat = 'plastico', sel = 0, all = [], cur = [], me = null;
 let center = [-23.5505, -46.6333]; // São Paulo (ponto inicial)
 
+// Material vindo da análise (?m=plastico)
+const pm = new URLSearchParams(location.search).get('m');
+if (pm && MN[pm]) {
+  mat = pm;
+  $('chips').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b.dataset.m === pm));
+}
+
 const map = L.map('map').setView(center, 13);
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 19,
@@ -79,12 +86,17 @@ function render(fit) {
   $('cnt').textContent = cur.length + (cur.length === 1 ? ' ponto encontrado' : ' pontos encontrados');
 
   $('list').innerHTML = cur.map((p, i) =>
-    `<button class="pt" data-i="${i}" aria-pressed="${i === sel}">
-       <span>${fmt(p.d)}</span><b>${i + 1}. ${esc(p.n)}</b>
-       <small>${p.m.length ? p.m.map(k => MN[k]).join(', ') : 'Materiais não informados'}</small>
+    `<button class="pt" type="button" data-i="${i}" aria-pressed="${i === sel}">
+       <i class="num">${i + 1}</i>
+       <span class="info">
+         <b>${esc(p.n)}</b>
+         <small>${p.t.opening_hours ? esc(p.t.opening_hours) : 'Horário não informado'}</small>
+         <small>${p.m.length ? p.m.map(k => MN[k]).join(', ') : 'Materiais não informados'}</small>
+       </span>
+       <span class="dist">${fmt(p.d)}</span>
      </button>` +
     (i === sel
-      ? `<p class="note" style="margin:-4px 0 10px">${p.t.opening_hours ? 'Horário: ' + esc(p.t.opening_hours) + ' · ' : ''}<a href="https://www.openstreetmap.org/directions?to=${p.lat}%2C${p.lon}" target="_blank" rel="noopener">Traçar rota</a></p>`
+      ? `<p class="route"><a href="https://www.openstreetmap.org/directions?to=${p.lat}%2C${p.lon}" target="_blank" rel="noopener">Traçar rota →</a></p>`
       : '')
   ).join('');
 
@@ -118,7 +130,7 @@ $('chips').addEventListener('click', e => {
   render(true);
 });
 
-// Busca por endereço
+// Busca por endereço (Enter ou lupa)
 $('sf').addEventListener('submit', async e => {
   e.preventDefault();
   const q = $('addr').value.trim();
@@ -144,13 +156,6 @@ $('loc').addEventListener('click', () => {
     { timeout: 10000 }
   );
 });
-
-// Material vindo da análise (?m=plastico)
-const pm = new URLSearchParams(location.search).get('m');
-if (pm && MN[pm]) {
-  mat = pm;
-  $('chips').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b.dataset.m === pm));
-}
 
 // Início: mostra pontos reais no centro de São Paulo
 render();
