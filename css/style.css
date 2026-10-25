@@ -125,10 +125,11 @@ button.btn{width:100%}
 .nm.on{background:#003d6e;transform:scale(1.3)}
 
 /* ---------- Sobre ---------- */
-.about{display:grid;grid-template-columns:1.3fr 1fr;gap:32px;margin-top:24px;align-items:start}
+.about{display:grid;grid-template-columns:1.3fr 1fr;gap:32px;margin-top:24px;align-items:stretch}
 .about p{color:#33433a;margin:10px 0}
-.photo-fig{margin:0}
-.ph{position:relative;aspect-ratio:4/3;border-radius:var(--r);overflow:hidden;background:linear-gradient(135deg,#7fae6e,#3f7a3a 60%,#2c5a2c)}
+.about > div:last-child{display:flex;flex-direction:column}
+.photo-fig{margin:0;flex:1;display:flex;flex-direction:column}
+.ph{position:relative;flex:1;min-height:220px;border-radius:var(--r);overflow:hidden;background:linear-gradient(135deg,#7fae6e,#3f7a3a 60%,#2c5a2c)}
 .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .photo-fig figcaption{margin-top:6px}
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:14px}
@@ -149,6 +150,7 @@ footer span a{margin-left:20px}
  nav{order:3;width:100%;justify-content:space-around;margin:0}
  main{padding:24px 16px}
  #map{min-height:320px}
+ .ph{flex:none;aspect-ratio:4/3}
 }
 
 /* ---------- Menos movimento ---------- */
